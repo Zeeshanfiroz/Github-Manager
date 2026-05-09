@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your Name | Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio for a developer and designer focused on polished web experiences, practical tooling, and thoughtful product work."
+    >
+    <link rel="stylesheet" href="portfolio.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Home">
+        <span class="brand-mark">YN</span>
+        <span>Your Name</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#work">Work</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Developer portfolio</p>
+          <h1 id="hero-title">Your Name</h1>
+          <p class="hero-role">Frontend Developer and Product Builder</p>
+          <p class="hero-summary">
+            I create sharp, reliable web experiences for people who need clean interfaces,
+            thoughtful workflows, and software that feels calm under pressure.
+          </p>
+          <div class="hero-actions" aria-label="Portfolio actions">
+            <a class="button primary" href="#work">View Work</a>
+            <a class="button" href="mailto:hello@example.com">Email Me</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Portfolio snapshot">
+          <div class="portrait-panel">
+            <div class="portrait-grid" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="portrait-card">
+              <span class="portrait-initials">YN</span>
+              <span class="portrait-label">Available for selected projects</span>
+            </div>
+          </div>
+          <dl class="metric-strip">
+            <div>
+              <dt>Projects</dt>
+              <dd>12+</dd>
+            </div>
+            <div>
+              <dt>Focus</dt>
+              <dd>UI</dd>
+            </div>
+            <div>
+              <dt>Stack</dt>
+              <dd>JS</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="section intro-band" aria-label="Professional summary">
+        <p>
+          I like work where the small details matter: layout rhythm, fast feedback,
+          useful states, accessible controls, and code that the next person can trust.
+        </p>
+      </section>
+
+      <section id="work" class="section" aria-labelledby="work-title">
+        <div class="section-heading">
+          <p class="eyebrow">Selected work</p>
+          <h2 id="work-title">Projects with practical polish</h2>
+        </div>
+        <div class="filters" role="list" aria-label="Project filters">
+          <button type="button" class="filter active" data-filter="all">All</button>
+          <button type="button" class="filter" data-filter="web">Web</button>
+          <button type="button" class="filter" data-filter="tools">Tools</button>
+          <button type="button" class="filter" data-filter="design">Design</button>
+        </div>
+        <div id="projectGrid" class="project-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="skills" class="section split-section" aria-labelledby="skills-title">
+        <div class="section-heading">
+          <p class="eyebrow">Capabilities</p>
+          <h2 id="skills-title">How I can help</h2>
+        </div>
+        <div class="skills-list">
+          <article>
+            <h3>Interface Engineering</h3>
+            <p>Responsive screens, component systems, accessibility, and performance-minded frontend code.</p>
+          </article>
+          <article>
+            <h3>Product Workflows</h3>
+            <p>Dashboards, editors, internal tools, automations, and complex states made easier to use.</p>
+          </article>
+          <article>
+            <h3>Design Translation</h3>
+            <p>Turning rough product ideas, sketches, and design files into usable, maintainable software.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-section" aria-labelledby="contact-title">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2 id="contact-title">Let’s build something useful.</h2>
+        </div>
+        <div class="contact-actions">
+          <a class="button primary" href="mailto:hello@example.com">hello@example.com</a>
+          <a class="button" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="button" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+      </section>
+    </main>
+
+    <template id="projectTemplate">
+      <article class="project-card">
+        <div class="project-preview" aria-hidden="true">
+          <span class="preview-bar"></span>
+          <span class="preview-line wide"></span>
+          <span class="preview-line"></span>
+          <span class="preview-block"></span>
+        </div>
+        <div class="project-content">
+          <span class="project-type"></span>
+          <h3></h3>
+          <p></p>
+          <ul class="tag-list"></ul>
+        </div>
+      </article>
+    </template>
+
+    <script src="portfolio.js" defer></script>
+  </body>
+</html>
