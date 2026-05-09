@@ -542,6 +542,21 @@ class CodeManager {
 
     const branch = await this.getBranch();
     const base = await this.getDefaultBranch();
+    const hasBaseOnRemote = await this.hasRemoteTrackingBranch(base);
+
+    if (!hasBaseOnRemote) {
+      const action = await vscode.window.showWarningMessage(
+        `The remote base branch "${base}" does not exist yet. Push it before opening a pull request.`,
+        "Push Base Branch"
+      );
+      if (action === "Push Base Branch") {
+        await this.git(["push", "-u", "origin", base]);
+        await this.refresh();
+      } else {
+        return;
+      }
+    }
+
     const url = `${repoUrl}/compare/${encodeURIComponent(base)}...${encodeURIComponent(branch)}?expand=1`;
     await vscode.env.openExternal(vscode.Uri.parse(url));
   }
@@ -557,6 +572,14 @@ class CodeManager {
     }
 
     return "main";
+  }
+
+  async hasRemoteTrackingBranch(branch) {
+    const result = await this.git(["show-ref", "--verify", `refs/remotes/origin/${branch}`], {
+      allowFailure: true,
+      silent: true
+    });
+    return result.exitCode === 0;
   }
 
   async createFile() {
@@ -804,13 +827,15 @@ class CodeManager {
     const hasCommits = await this.hasCommits();
     const shouldCreateBranch = hasCommits && (branch === "main" || branch === "master");
     const nextBranch = shouldCreateBranch ? `codex/auto-${timestampForBranch()}` : branch;
+    const needsBasePush = shouldCreateBranch && !(await this.hasRemoteTrackingBranch(branch));
     const message = generateCommitMessage(files);
     const plan = [
+      needsBasePush ? `Push base branch ${branch} to origin` : "",
       shouldCreateBranch ? `Create branch ${nextBranch}` : `Use branch ${branch}`,
       `Commit ${files.length} changed file${files.length === 1 ? "" : "s"} with "${message}"`,
       `Push ${nextBranch} to origin`,
       "Open a pull request page"
-    ];
+    ].filter(Boolean);
 
     const approved = await vscode.window.showWarningMessage(
       this.automationMode === "full" ? "Run full automation?" : "Run suggested automation?",
@@ -823,6 +848,10 @@ class CodeManager {
 
     if (approved !== "Run") {
       return;
+    }
+
+    if (needsBasePush) {
+      await this.git(["push", "-u", "origin", branch]);
     }
 
     if (shouldCreateBranch) {

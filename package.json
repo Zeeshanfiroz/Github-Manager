@@ -2,7 +2,7 @@
   "name": "github-code-manager",
   "displayName": "GitHub Code Manager",
   "description": "Manage code files, Git history, push/pull workflows, and automation modes from VS Code.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "local",
   "engines": {
     "vscode": "^1.84.0"
