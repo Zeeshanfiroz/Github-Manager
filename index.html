@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GitHub Manager</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Repository controls">
+        <header class="brand">
+          <div class="brand-mark" aria-hidden="true">GM</div>
+          <div>
+            <h1>GitHub Manager</h1>
+            <p id="connectionState">Offline</p>
+          </div>
+        </header>
+
+        <form id="connectForm" class="control-stack">
+          <label>
+            <span>Token</span>
+            <input id="tokenInput" type="password" autocomplete="off" placeholder="ghp_...">
+          </label>
+          <div class="field-row">
+            <label>
+              <span>Owner</span>
+              <input id="ownerInput" type="text" autocomplete="off" placeholder="octocat">
+            </label>
+            <label>
+              <span>Repo</span>
+              <input id="repoInput" type="text" autocomplete="off" placeholder="hello-world">
+            </label>
+          </div>
+          <label>
+            <span>Branch</span>
+            <input id="branchInput" type="text" autocomplete="off" placeholder="main">
+          </label>
+          <div class="button-row">
+            <button class="primary" type="submit">Connect</button>
+            <button id="refreshButton" type="button">Refresh</button>
+          </div>
+        </form>
+
+        <section class="control-stack" aria-label="Branch tools">
+          <label>
+            <span>New Branch</span>
+            <input id="newBranchInput" type="text" autocomplete="off" placeholder="codex/update-files">
+          </label>
+          <button id="createBranchButton" type="button">Create Branch</button>
+        </section>
+
+        <section class="file-browser" aria-label="Repository files">
+          <div class="section-head">
+            <h2>Files</h2>
+            <span id="fileCount">0</span>
+          </div>
+          <input id="fileSearch" class="search" type="search" placeholder="Search paths">
+          <div id="fileList" class="file-list" role="listbox" aria-label="Code files"></div>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div class="path-block">
+            <label for="pathInput">Path</label>
+            <input id="pathInput" type="text" spellcheck="false" placeholder="src/app.js">
+          </div>
+          <div class="toolbar" aria-label="File actions">
+            <button id="newFileButton" type="button" title="New file">New</button>
+            <button id="saveButton" class="success" type="button" title="Commit file">Save</button>
+            <button id="deleteButton" class="danger" type="button" title="Delete file">Delete</button>
+          </div>
+        </header>
+
+        <section class="editor-panel" aria-label="Editor">
+          <div class="editor-meta">
+            <div>
+              <strong id="activeFileName">No file selected</strong>
+              <span id="activeFileDetails">Connect to a repository</span>
+            </div>
+            <span id="dirtyBadge" class="badge">Clean</span>
+          </div>
+          <textarea id="editor" spellcheck="false" placeholder="Select or create a file"></textarea>
+        </section>
+      </main>
+
+      <aside class="inspector" aria-label="Commit and activity">
+        <section class="control-stack">
+          <div class="section-head">
+            <h2>Commit</h2>
+            <span id="branchBadge">main</span>
+          </div>
+          <label>
+            <span>Message</span>
+            <input id="commitMessageInput" type="text" value="Update code file">
+          </label>
+          <div class="repo-stats" aria-label="Repository status">
+            <div>
+              <span>Branch</span>
+              <strong id="statBranch">-</strong>
+            </div>
+            <div>
+              <span>Files</span>
+              <strong id="statFiles">0</strong>
+            </div>
+            <div>
+              <span>Selection</span>
+              <strong id="statSelection">None</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="activity-panel">
+          <div class="section-head">
+            <h2>Activity</h2>
+            <button id="clearLogButton" type="button">Clear</button>
+          </div>
+          <ol id="activityLog" class="activity-log"></ol>
+        </section>
+      </aside>
+    </div>
+
+    <template id="fileRowTemplate">
+      <button class="file-row" type="button" role="option">
+        <span class="file-type" aria-hidden="true"></span>
+        <span class="file-path"></span>
+        <span class="file-size"></span>
+      </button>
+    </template>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

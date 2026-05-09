@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--disable-extensions",
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "${workspaceFolder}"
+      ],
+      "outFiles": [],
+      "skipFiles": [
+        "<node_internals>/**",
+        "${env:USERPROFILE}/.vscode/extensions/**",
+        "c:/Microsoft VS Code/**"
+      ],
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**",
+        "!${env:USERPROFILE}/.vscode/extensions/**",
+        "!c:/Microsoft VS Code/**"
+      ]
+    }
+  ]
+}

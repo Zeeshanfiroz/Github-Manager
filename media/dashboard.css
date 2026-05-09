@@ -1,0 +1,265 @@
+:root {
+  --bg: var(--vscode-editor-background);
+  --panel: var(--vscode-sideBar-background);
+  --panel-strong: var(--vscode-editorWidget-background);
+  --text: var(--vscode-foreground);
+  --muted: var(--vscode-descriptionForeground);
+  --line: var(--vscode-panel-border);
+  --accent: var(--vscode-button-background);
+  --accent-text: var(--vscode-button-foreground);
+  --danger: var(--vscode-errorForeground);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+}
+
+button {
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel-strong);
+  color: var(--text);
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: var(--vscode-focusBorder);
+}
+
+.shell {
+  display: grid;
+  gap: 18px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.eyebrow,
+.hero p,
+.stats span,
+.mode-card span,
+.notes p {
+  color: var(--muted);
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+.mode-strip,
+.stats,
+.actions,
+.file-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.mode-strip {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mode-card {
+  display: grid;
+  gap: 4px;
+  min-height: 72px;
+  padding: 12px;
+  text-align: left;
+}
+
+.mode-card.active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, var(--panel-strong));
+}
+
+.stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.stats div,
+.files-panel,
+.details-panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.stats div {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  padding: 12px;
+}
+
+.stats strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actions {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
+.primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.danger {
+  color: var(--danger);
+}
+
+.work-area {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 18px;
+  min-height: 420px;
+}
+
+.files-panel,
+.details-panel {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 14px;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.section-head span {
+  overflow: hidden;
+  max-width: 260px;
+  color: var(--muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-list {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+}
+
+.file-row {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+}
+
+.file-row.active {
+  border-color: var(--accent);
+}
+
+.status-pill {
+  width: 82px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--panel-strong);
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.status-pill.added {
+  color: var(--vscode-gitDecoration-addedResourceForeground);
+}
+
+.status-pill.modified,
+.status-pill.renamed {
+  color: var(--vscode-gitDecoration-modifiedResourceForeground);
+}
+
+.status-pill.deleted {
+  color: var(--vscode-gitDecoration-deletedResourceForeground);
+}
+
+.file-path {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-actions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.notes {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  line-height: 1.5;
+}
+
+.empty-state {
+  display: grid;
+  min-height: 160px;
+  place-items: center;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .mode-strip,
+  .stats,
+  .actions,
+  .work-area {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "name": "github-code-manager",
+  "displayName": "GitHub Code Manager",
+  "description": "Manage code files, Git history, push/pull workflows, and automation modes from VS Code.",
+  "version": "0.0.1",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": [
+    "Other",
+    "SCM Providers"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "*",
+    "onStartupFinished",
+    "onView:githubCodeManager.changedFiles",
+    "onCommand:githubCodeManager.openDashboard",
+    "onCommand:githubCodeManager.showDashboard"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "githubCodeManager",
+          "title": "Code Manager",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "githubCodeManager": [
+        {
+          "id": "githubCodeManager.changedFiles",
+          "name": "Changed Files"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "githubCodeManager.openDashboard",
+        "title": "Open Dashboard",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.showDashboard",
+        "title": "GitHub Code Manager Dashboard"
+      },
+      {
+        "command": "githubCodeManager.refresh",
+        "title": "Refresh",
+        "category": "GitHub Code Manager",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "githubCodeManager.pull",
+        "title": "Pull Latest",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.push",
+        "title": "Push Branch",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.commit",
+        "title": "Commit Changes",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.createBranch",
+        "title": "Create Branch",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.switchBranch",
+        "title": "Switch Branch",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.openPullRequest",
+        "title": "Open Pull Request",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.setOriginRemote",
+        "title": "Set Origin Remote",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.createFile",
+        "title": "Create File",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.renameFile",
+        "title": "Rename File",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.deleteFile",
+        "title": "Delete File",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.openFile",
+        "title": "Open File",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.viewHistory",
+        "title": "View File History",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.compareWithPrevious",
+        "title": "Compare With Previous Version",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.restoreFileVersion",
+        "title": "Restore File Version",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.runAutomation",
+        "title": "Run Automation",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.setGitHubToken",
+        "title": "Set GitHub Token",
+        "category": "GitHub Code Manager"
+      },
+      {
+        "command": "githubCodeManager.clearGitHubToken",
+        "title": "Clear GitHub Token",
+        "category": "GitHub Code Manager"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "githubCodeManager.openDashboard",
+          "when": "view == githubCodeManager.changedFiles",
+          "group": "navigation@1"
+        },
+        {
+          "command": "githubCodeManager.refresh",
+          "when": "view == githubCodeManager.changedFiles",
+          "group": "navigation@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "githubCodeManager.openFile",
+          "when": "view == githubCodeManager.changedFiles && viewItem == changedFile",
+          "group": "inline@1"
+        },
+        {
+          "command": "githubCodeManager.viewHistory",
+          "when": "view == githubCodeManager.changedFiles && viewItem == changedFile",
+          "group": "inline@2"
+        },
+        {
+          "command": "githubCodeManager.compareWithPrevious",
+          "when": "view == githubCodeManager.changedFiles && viewItem == changedFile",
+          "group": "navigation@1"
+        },
+        {
+          "command": "githubCodeManager.restoreFileVersion",
+          "when": "view == githubCodeManager.changedFiles && viewItem == changedFile",
+          "group": "navigation@2"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "GitHub Code Manager",
+      "properties": {
+        "githubCodeManager.defaultAutomationMode": {
+          "type": "string",
+          "enum": [
+            "manual",
+            "semi",
+            "full"
+          ],
+          "default": "semi",
+          "description": "Default automation mode for GitHub Code Manager."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "node --check src/extension.js && node --check media/dashboard.js",
+    "check": "node --check src/extension.js && node --check media/dashboard.js && node -e \"JSON.parse(require('fs').readFileSync('package.json','utf8')); console.log('package ok')\"",
+    "package:local": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package-vsix.ps1",
+    "deploy:local": "npm run check && npm run package:local"
+  }
+}

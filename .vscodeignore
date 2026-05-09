@@ -1,0 +1,11 @@
+.git/**
+.vscode/**
+.vscode-test/**
+node_modules/**
+dist/**
+scripts/**
+app.js
+index.html
+styles.css
+*.vsix
+*.log
